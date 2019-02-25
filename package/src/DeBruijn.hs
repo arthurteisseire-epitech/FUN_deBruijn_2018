@@ -1,16 +1,16 @@
 module DeBruijn
-    ( ini
-    , deBruijn
+    ( deBruijn
     ) where
 
 import Data.List
-import Debug.Trace
 
 deBruijn :: Int -> String -> String
-deBruijn n a = getA n a (ini n a)
+deBruijn n a = createSeq n a (take n (repeat (head a)))
 
-ini :: Int -> [Char] -> [Char]
-ini n a = take n (repeat (head a))
+createSeq :: Int -> String -> String -> String
+createSeq n a seq
+    | getA n a seq == [] = seq
+    | otherwise = createSeq n a (seq ++ getA n a seq)
 
 getA :: Int -> String -> String -> String
 getA _ [] seq = []
@@ -19,4 +19,4 @@ getA n a seq
     | otherwise = [last a]
 
 getTail :: Int -> String -> String -> String
-getTail n a seq = drop (length seq - n) seq ++ [last a]
+getTail n a seq = drop (length seq - (n - 1)) seq ++ [last a]
