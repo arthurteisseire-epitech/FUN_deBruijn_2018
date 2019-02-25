@@ -9,7 +9,7 @@ deBruijn n a = createSeq n a (take n (repeat (head a)))
 
 createSeq :: Int -> String -> String -> String
 createSeq n a seq
-    | getA n a seq == [] = seq
+    | getA n a seq == [] = take (length seq - (n - 1)) seq
     | otherwise = createSeq n a (seq ++ getA n a seq)
 
 getA :: Int -> String -> String -> String
