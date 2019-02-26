@@ -12,10 +12,4 @@ main = do
 getIntArg :: IO Int
 getIntArg = fmap (read . head) getArgs
 
-dispatch =  [ ("--check", deBruijn)
-            , ("--unique", deBruijn)
-            , ("--clean", deBruijn)
-            ]
-
-
 printDeBruijn n a "--check" = putStrLn (deBruijn n a)
