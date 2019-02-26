@@ -1,11 +1,11 @@
-module DeBruijn
-    ( deBruijn
+module Generate
+    ( generate
     ) where
 
 import Data.List
 
-deBruijn :: Int -> String -> String
-deBruijn n a = createSeq n a (take n (repeat (head a)))
+generate :: Int -> String -> String
+generate n a = createSeq n a (take n (repeat (head a)))
 
 createSeq n a seq
     | getA n a seq == [] = take (length seq - (n - 1)) seq
