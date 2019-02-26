@@ -4,7 +4,5 @@ module Check
 
 import System.IO
 
-check :: Int -> String -> IO String -> String
-check n a input = "toto"
-
-checkDeBruijn input = input
+check :: Int -> String -> String -> Bool
+check n a input = True
