@@ -4,6 +4,7 @@ module DeBruijn
 
 import Data.List
 
+deBruijn :: Int -> String -> String
 deBruijn n a = createSeq n a (take n (repeat (head a)))
 
 createSeq n a seq
