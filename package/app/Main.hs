@@ -33,7 +33,8 @@ areArgsValid args
     | length args == 0 = False
     | otherwise = isInt (head args)
 
-isInt [] = True
+isInt [] = False
 isInt s
+    | tail s == [] = True
     | isDigit (head s) == False = False
     | otherwise = isInt $ tail s
