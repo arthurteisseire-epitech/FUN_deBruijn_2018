@@ -9,15 +9,16 @@ import Bridge
 main :: IO ()
 main = do
     args <- getArgs
-    if areArgsValid args == False then exitWith (ExitFailure 84)
+    if areArgsValid args == False
+    then exitWithHelp
     else case lookup (last args) dispatch of
         Just action -> exec (read (head args)::Int) (init args) action
         Nothing -> exec (read (head args)::Int) args generateDeBruijn
 
 exec :: Int -> [String] -> (Int -> String -> IO ()) -> IO ()
 exec n args action
-    | n == 0 = exitWith (ExitFailure 84)
-    | isAlphabetValid (args !! 1) == False = exitWith (ExitFailure 84)
+    | n == 0 = exitWithHelp
+    | isAlphabetValid (args !! 1) == False = exitWithHelp
     | length args == 2 = action n (args !! 1)
     | otherwise = action n "01"
 
@@ -38,3 +39,12 @@ isInt (x:xs)
     | xs == [] = True
     | isDigit x == False = False
     | otherwise = isInt xs
+
+exitWithHelp = do
+    putStrLn "USAGE: ./deBruijn n [a] [--check|--unique|--clean]\n\n\t\
+                     \--check\t\tcheck if a sequence is a de Bruijn sequence\n\t\
+                     \--unique\tcheck if 2 sequences are distinct de Bruijn sequences\n\t\
+                     \--clean\t\tlist cleaning\n\t\
+                     \n\t\torder of the sequence\n\t\
+                     \a\t\talphabet [def: \"01\"]"
+    exitWith (ExitFailure 84)
