@@ -6,7 +6,7 @@ import Data.List
 
 check n a input
     | onlyChars a input == False = False
-    | length a ^ n == length input = isValid n a input
+    | length a ^ n == length input = isValid n a (input ++ take (n - 1) input)
     | otherwise = False
 
 isValid _ _ [] = True
