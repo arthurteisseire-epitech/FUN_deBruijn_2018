@@ -7,6 +7,7 @@
 
 all:
 	stack build
+	stack install --local-bin-path ./
 
 clean:
 	stack clean
