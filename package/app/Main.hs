@@ -34,7 +34,7 @@ areArgsValid args
     | otherwise = isInt (head args)
 
 isInt [] = False
-isInt s
-    | tail s == [] = True
-    | isDigit (head s) == False = False
-    | otherwise = isInt $ tail s
+isInt (x:xs)
+    | xs == [] = True
+    | isDigit x == False = False
+    | otherwise = isInt xs
