@@ -9,7 +9,7 @@ main :: IO ()
 main = do
     args <- getArgs
     n <- fmap (read . head) getArgs
-    case (lookup (last args) dispatch) of
+    case lookup (last args) dispatch of
         Nothing -> putStrLn $ exec n args generate
         Just x -> putStrLn $ exec n (init args) x
 
