@@ -18,7 +18,7 @@ main = do
 exec :: Int -> [String] -> (Int -> String -> IO ()) -> IO ()
 exec n args action
     | n == 0 = exitWithHelp
-    | isAlphabetValid (args !! 1) == False = exitWithHelp
+    | length args == 2 && isAlphabetValid (args !! 1) == False = exitWithHelp
     | length args == 2 = action n (args !! 1)
     | otherwise = action n "01"
 

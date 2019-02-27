@@ -2,5 +2,6 @@ module Check
     ( check
     ) where
 
-check :: Int -> String -> String -> Bool
-check n a input = True
+check n a input
+    | length a ^ n == length input =  True
+    | otherwise = False
