@@ -9,9 +9,9 @@ main :: IO ()
 main = do
     args <- getArgs
     n <- getIntArg
-    if (last args) `elem` flags
-    then putStrLn $ exec n (init args) (fromJust $ lookup (last args) dispatch)
-    else putStrLn $ exec n args generate
+    case (lookup (last args) dispatch) of
+        Nothing -> putStrLn $ exec n args generate
+        Just x -> putStrLn $ exec n (init args) x
 
 getIntArg :: IO Int
 getIntArg = fmap (read . head) getArgs
@@ -22,8 +22,6 @@ exec n args action
     | otherwise = action n "01"
 
 dispatch = [ ("--check", generate) ]
-
-flags = ["--check", "--clean", "--unique"]
 
 --checkDeBruijn :: Int -> String -> String -> IO ()
 --checkDeBruijn n a "--check" = do
