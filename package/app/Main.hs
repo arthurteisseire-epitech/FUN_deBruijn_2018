@@ -8,13 +8,10 @@ import Data.Maybe
 main :: IO ()
 main = do
     args <- getArgs
-    n <- getIntArg
+    n <- fmap (read . head) getArgs
     case (lookup (last args) dispatch) of
         Nothing -> putStrLn $ exec n args generate
         Just x -> putStrLn $ exec n (init args) x
-
-getIntArg :: IO Int
-getIntArg = fmap (read . head) getArgs
 
 exec :: Int -> [String] -> (Int -> String -> String) -> String
 exec n args action
