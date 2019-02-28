@@ -11,3 +11,4 @@ all:
 
 clean:
 	stack clean
+	rm deBruijn
