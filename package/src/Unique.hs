@@ -9,7 +9,7 @@ import Debug.Trace
 unique n a input1 input2
     | check n a input1 == False = False
     | check n a input2 == False = False
-    | otherwise = isUnique n input1 input2
+    | otherwise = isUnique n (input1 ++ (take (n - 1) input1)) (input2 ++ (take (n - 1) input2))
 
 isUnique n input1 input2 = case findSubstring (take n input1) input2 of
     Nothing -> True
