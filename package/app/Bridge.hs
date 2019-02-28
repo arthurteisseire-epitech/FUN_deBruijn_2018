@@ -3,6 +3,8 @@ module Bridge
     , generateDeBruijn
     ) where
 
+import System.Exit
+import System.IO
 import Generate
 import Check
 import Unique
@@ -18,14 +20,14 @@ generateDeBruijn n a = putStrLn $ generate n a
 
 checkBridge :: Int -> String -> IO ()
 checkBridge n a = do
-    l <- getLine
+    l <- handleGetLine
     if check n a l
     then putStrLn "OK"
     else putStrLn "KO"
 
 uniqueBridge n a = do
-    l1 <- getLine
-    l2 <- getLine
+    l1 <- handleGetLine
+    l2 <- handleGetLine
     if unique n a l1 l2
     then putStrLn "OK"
     else putStrLn "KO"
@@ -33,7 +35,14 @@ uniqueBridge n a = do
 cleanBridge n a = checkInputLines n a []
 
 checkInputLines n a array = do
-    l <- getLine
+    l <- handleGetLine
     if l == "END"
     then mapM_ putStrLn $ reverse $ clean n a array
     else checkInputLines n a (l : array)
+
+handleGetLine :: IO String
+handleGetLine = do
+    e <- isEOF
+    if e
+    then exitWith (ExitFailure 84)
+    else getLine
