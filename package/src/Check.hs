@@ -5,6 +5,7 @@ module Check
 import Data.List
 
 check n a input
+    | input == "" = False
     | onlyChars a input == False = False
     | length a ^ n == length input = isValid n a (input ++ take (n - 1) input)
     | otherwise = False
