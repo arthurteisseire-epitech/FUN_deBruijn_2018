@@ -28,7 +28,6 @@ isAlphabetValid (x:xs)
     | x `elem` xs = False
     | otherwise = isAlphabetValid xs
 
-
 areArgsValid args
     | length args > 3 = False
     | length args == 3 && (args !! 2) == "" = False
