@@ -6,9 +6,11 @@ module Bridge
 import Generate
 import Check
 import Unique
+import Clean
 
 dispatch = [ ("--check", checkBridge)
            , ("--unique", uniqueBridge)
+           , ("--clean", cleanBridge)
            ]
 
 generateDeBruijn :: Int -> String -> IO ()
@@ -27,3 +29,11 @@ uniqueBridge n a = do
     if unique n a l1 l2
     then putStrLn "OK"
     else putStrLn "KO"
+
+cleanBridge n a = checkInputLines n a []
+
+checkInputLines n a array = do
+    l <- getLine
+    if l == "END"
+    then mapM_ putStrLn $ clean n a array
+    else checkInputLines n a (l : array)

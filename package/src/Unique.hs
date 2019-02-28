@@ -1,10 +1,10 @@
 module Unique
     ( unique
+    , isUnique
     ) where
 
 import Data.List
 import Check
-import Debug.Trace
 
 unique n a input1 input2
     | check n a input1 == False = False
