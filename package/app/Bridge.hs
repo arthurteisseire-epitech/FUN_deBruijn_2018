@@ -35,5 +35,5 @@ cleanBridge n a = checkInputLines n a []
 checkInputLines n a array = do
     l <- getLine
     if l == "END"
-    then mapM_ putStrLn $ clean n a array
+    then mapM_ putStrLn $ reverse $ clean n a array
     else checkInputLines n a (l : array)
