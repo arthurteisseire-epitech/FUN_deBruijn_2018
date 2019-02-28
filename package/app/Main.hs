@@ -31,6 +31,7 @@ isAlphabetValid (x:xs)
 
 areArgsValid args
     | length args > 3 = False
+    | length args == 3 && (args !! 2) == "" = False
     | length args == 0 = False
     | otherwise = isInt (head args)
 
