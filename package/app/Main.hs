@@ -13,7 +13,7 @@ main = do
     then exitWithHelp
     else case lookup (last args) dispatch of
         Just action -> exec (read (head args)::Int) (init args) action
-        Nothing -> exec (read (head args)::Int) args generateDeBruijn
+        Nothing -> if length args == 3 then exitWithHelp else exec (read (head args)::Int) args generateDeBruijn
 
 exec :: Int -> [String] -> (Int -> String -> IO ()) -> IO ()
 exec n args action
